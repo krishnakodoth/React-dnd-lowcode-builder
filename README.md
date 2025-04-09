@@ -1,38 +1,54 @@
-# React-dnd-lowcode-builder
-A simple low-code builder built with React and React DnD. This project demonstrates how to drag and drop pre-defined UI components (like inputs, checkboxes, and buttons) onto a canvas and render them dynamically — a foundational feature of modern low-code/no-code platforms.
+# React + TypeScript + Vite
 
-✨ Features
-🎯 Drag-and-drop UI components using react-dnd
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-🧩 Modular component architecture
+Currently, two official plugins are available:
 
-⚙️ Easily extendable with custom components and props
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-🎨 Clean and minimal UI with live rendering
+## Expanding the ESLint configuration
 
-🚀 Great starting point for building low-code editors, form builders, or UI designers
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-🔧 Components Included
-Text Input with label and placeholder
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-Checkbox with label
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Button with customizable text
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-📁 Folder Structure
-App.jsx — main layout with sidebar and canvas
-
-componentMap — central logic for rendering components dynamically
-
-defaultProps — default properties for each draggable component
-
-📦 Tech Stack
-React
-
-react-dnd
-
-HTML5 backend
-
-CSS (basic styling)
-
-
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```
